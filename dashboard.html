@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinTrack Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="nav-left">
+        <span class="logo">FinTrack Pro</span>
+        <ul class="nav-links">
+          <li class="nav-link active-nav-link"><a href="#">Dashboard</a></li>
+          <li class="nav-link"><a href="#">Settings</a></li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <button class="btn-primary add-transaction-btn">
+          + Add transaction
+        </button>
+        <button class="btn-danger logout-btn">Log out</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="dashboard-section">
+        <div class="info-cards">
+          <div class="info-card">
+            <p class="info-card-title">Balance</p>
+            <p class="info-card-value">
+              <span class="info-card-currency">₹</span>
+              <span class="info-card-amount current-balance-amount">0</span>
+            </p>
+          </div>
+          <div class="info-card">
+            <p class="info-card-title">Income</p>
+            <p class="info-card-value">
+              <span class="info-card-currency">₹</span>
+              <span class="info-card-amount total-income-amount">0</span>
+            </p>
+          </div>
+          <div class="info-card">
+            <p class="info-card-title">Expenses</p>
+            <p class="info-card-value">
+              <span class="info-card-currency">₹</span>
+              <span class="info-card-amount total-expense-amount">0</span>
+            </p>
+          </div>
+          <div class="info-card">
+            <p class="info-card-title">Transactions</p>
+            <p class="info-card-value">
+              <span class="info-card-amount total-transaction-amount">0</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="cash-flow-chart">
+          <div class="chart-heading">
+            <h2>This week</h2>
+          </div>
+          <canvas id="cash-flow-chart-canvas"></canvas>
+        </div>
+
+        <div class="transaction-section">
+          <div class="transaction-header">
+            <h2>Transactions</h2>
+            <div class="transaction-filters">
+              <button class="filter-btn active">All</button>
+              <button class="filter-btn">Income</button>
+              <button class="filter-btn">Expense</button>
+            </div>
+          </div>
+
+          <table class="transaction-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody class="transaction-table-body">
+              <tr>
+                <td colspan="5" class="empty-message">No transactions yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <div class="settings-card">
+          <h2>Settings</h2>
+
+          <div class="settings-group">
+            <label for="profile-name">Display name</label>
+            <input id="profile-name" type="text" placeholder="Your name" />
+          </div>
+
+          <div class="settings-group">
+            <label for="currency">Currency</label>
+            <select id="currency">
+              <option value="₹">INR — ₹</option>
+              <option value="$">USD — $</option>
+              <option value="€">EUR — €</option>
+              <option value="£">GBP — £</option>
+              <option value="¥">JPY — ¥</option>
+            </select>
+          </div>
+
+          <div class="settings-group settings-toggle">
+            <label for="dark-mode">Dark mode</label>
+            <input id="dark-mode" type="checkbox" />
+          </div>
+
+          <button class="btn-danger reset-btn">Reset all data</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- modal -->
+    <div class="transaction-modal-overlay">
+      <div class="transaction-modal">
+        <div class="transaction-modal-header">
+          <h2>Add transaction</h2>
+          <button class="close-modal-btn" aria-label="Close">✕</button>
+        </div>
+
+        <div class="transaction-form">
+          <div class="form-group">
+            <label>Type</label>
+            <select class="transaction-type">
+              <option>Income</option>
+              <option>Expense</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              type="text"
+              class="transaction-description"
+              placeholder="e.g. Salary, Groceries"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Amount</label>
+            <input
+              type="number"
+              class="transaction-amount"
+              placeholder="0.00"
+              min="0"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" class="transaction-date" />
+          </div>
+
+          <div class="form-group">
+            <label>Category</label>
+            <select class="transaction-category">
+              <option>Food &amp; Dining</option>
+              <option>Shopping</option>
+              <option>Salary</option>
+              <option>Utilities</option>
+              <option>Recharge &amp; Bills</option>
+              <option>Petrol &amp; Auto</option>
+              <option>Entertainment</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="transaction-actions">
+            <button class="btn-danger cancel-btn">Cancel</button>
+            <button class="btn-primary save-transaction-btn">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
